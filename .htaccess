@@ -1,0 +1,26 @@
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Se existir a pasta dist e ela tiver index.html, serve a partir de dist/
+  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
+  RewriteCond %{REQUEST_URI} !^/dist/
+  RewriteRule ^(.*)$ /dist/$1 [L]
+
+  # Se o arquivo ou diretório físico existir, serve normalmente
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Fallback para dist/index.html se existir
+  RewriteCond %{DOCUMENT_ROOT}/dist/index.html -f
+  RewriteRule ^ dist/index.html [L]
+
+  # Fallback padrão
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Habilitar compressão GZIP
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>

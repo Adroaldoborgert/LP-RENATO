@@ -1,6 +1,7 @@
 import React from 'react';
 import { ArrowUpRight } from '@phosphor-icons/react';
 import { HERO_DATA } from '../data/courseData';
+import profCostaPortrait from '../assets/images/prof_costa_portrait_1788296304120.jpg';
 
 interface HeroSectionProps {
   onOpenCheckout: () => void;
@@ -76,7 +77,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ onOpenCheckout }) => {
               
               <div className="relative rounded-2xl overflow-hidden bg-[#132A40] border border-[#1D3B5A] shadow-2xl">
                 <img
-                  src="/src/assets/images/prof_costa_portrait_1788296304120.jpg"
+                  src={profCostaPortrait}
                   alt="Professor R. Costa"
                   className="w-full h-auto object-cover hover:scale-[1.01] transition-transform duration-700"
                   referrerPolicy="no-referrer"

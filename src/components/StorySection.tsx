@@ -1,4 +1,5 @@
 import React from 'react';
+import profCostaPortrait from '../assets/images/prof_costa_portrait_1788296304120.jpg';
 
 export const StorySection: React.FC = () => {
   return (
@@ -29,7 +30,7 @@ export const StorySection: React.FC = () => {
 
                 {/* Professor Costa Portrait */}
                 <img
-                  src="/src/assets/images/prof_costa_portrait_1788296304120.jpg"
+                  src={profCostaPortrait}
                   alt="Professor R. Costa"
                   className="w-full h-full object-cover object-top relative z-10 transition-transform duration-700 hover:scale-[1.02]"
                   referrerPolicy="no-referrer"

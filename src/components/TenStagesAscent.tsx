@@ -61,7 +61,7 @@ export const TenStagesAscent: React.FC<TenStagesAscentProps> = ({ onOpenCheckout
                 id={`stage-card-${stage.number}`}
                 className={`p-6 sm:p-7 rounded-2xl transition-all duration-300 relative overflow-hidden flex flex-col justify-between group ${
                   isSummit
-                    ? 'bg-gradient-to-b from-[#132A40] to-[#0E1E31] border-2 border-[#D6A84F] shadow-2xl md:col-span-2'
+                    ? 'bg-gradient-to-b from-[#132A40] to-[#0E1E31] border-2 border-[#D6A84F] shadow-2xl'
                     : 'bg-[#132A40]/85 border border-[#1D3B5A] hover:border-[#D6A84F]/60 shadow-lg'
                 }`}
               >
