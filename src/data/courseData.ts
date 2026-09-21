@@ -199,7 +199,7 @@ export const OFFER_DATA = {
     installmentValue: "R$ 9,68",
     pixNotice: "OU R$ 97 À VISTA NO PIX / CARTÃO"
   },
-  ctaText: "QUERO COMEÇAR O CURSO AGORA",
+  ctaText: "Garantir minha vaga",
   microcopy: "Acesso imediato • 100% online • Garantia incondicional de 7 dias",
   guarantee: {
     title: "GARANTIA DE 7 DIAS",
