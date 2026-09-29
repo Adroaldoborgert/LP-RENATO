@@ -1,5 +1,5 @@
 import React from 'react';
-import profCostaPortrait from '../assets/images/prof_costa_portrait_1788296304120.jpg';
+import { ProfessorPhotoFrame } from './ProfessorPhotoFrame';
 
 export const StorySection: React.FC = () => {
   return (
@@ -29,15 +29,13 @@ export const StorySection: React.FC = () => {
                 <div className="absolute top-20 w-44 h-44 rounded-full bg-[#D6A84F]/15 blur-xl pointer-events-none" />
 
                 {/* Professor Costa Portrait */}
-                <img
-                  src={profCostaPortrait}
+                <ProfessorPhotoFrame
+                  className="w-full h-full relative z-10"
+                  aspectRatioClass="h-full w-full"
+                  imageClassName="w-full h-full object-cover object-top"
                   alt="Professor R. Costa"
-                  className="w-full h-full object-cover object-top relative z-10 transition-transform duration-700 hover:scale-[1.02]"
-                  referrerPolicy="no-referrer"
+                  showVignette={true}
                 />
-
-                {/* Bottom Soft Vignette Gradient */}
-                <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-[#0B1726] via-[#0B1726]/40 to-transparent z-10 pointer-events-none" />
 
               </div>
 
