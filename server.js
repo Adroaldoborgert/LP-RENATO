@@ -22,11 +22,32 @@ if (!fs.existsSync(distPath) || !fs.existsSync(path.join(distPath, 'index.html')
   }
 }
 
+// Parser para JSON com suporte a imagem base64
+app.use(express.json({ limit: '25mb' }));
+
 // Servir arquivos estáticos da pasta dist
 app.use(express.static(distPath, {
   maxAge: '1d',
   etag: true,
 }));
+
+// Endpoint para persistir foto diretamente nos arquivos físicos da Hostinger
+app.post('/api/save-photo', (req, res) => {
+  try {
+    const { dataUrl } = req.body;
+    if (dataUrl && typeof dataUrl === 'string' && dataUrl.startsWith('data:image/')) {
+      const base64Data = dataUrl.replace(/^data:image\/\w+;base64,/, '');
+      const buffer = Buffer.from(base64Data, 'base64');
+      fs.writeFileSync(path.join(__dirname, 'src/assets/images/professor-costa.jpg'), buffer);
+      fs.writeFileSync(path.join(__dirname, 'public/assets/images/professor-costa.jpg'), buffer);
+      fs.writeFileSync(path.join(__dirname, 'src/assets/images/savedPhotoData.ts'), `export const EMBEDDED_CUSTOM_PHOTO = ${JSON.stringify(dataUrl)};\n`);
+      return res.json({ success: true, message: 'Foto persistida com sucesso' });
+    }
+  } catch (err) {
+    console.error('[Server] Erro ao salvar foto:', err);
+  }
+  res.status(400).json({ success: false, error: 'Dados inválidos' });
+});
 
 // Rota de verificação de saúde da aplicação
 app.get('/api/health', (req, res) => {
