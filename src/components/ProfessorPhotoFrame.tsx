@@ -1,6 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Camera, CheckCircle2, UploadCloud } from 'lucide-react';
 import { useProfessorPhoto } from '../utils/photoManager';
+import defaultPortrait from '../assets/images/professor-costa.jpg';
 
 interface ProfessorPhotoFrameProps {
   className?: string;
@@ -21,6 +22,24 @@ export const ProfessorPhotoFrame: React.FC<ProfessorPhotoFrameProps> = ({
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const [syncedToast, setSyncedToast] = useState(false);
+  
+  // Imagem com fallback sequencial garantido
+  const [imgSrc, setImgSrc] = useState<string>(() => photoUrl || defaultPortrait);
+
+  useEffect(() => {
+    if (photoUrl) {
+      setImgSrc(photoUrl);
+    }
+  }, [photoUrl]);
+
+  const handleImageError = () => {
+    console.warn('[ProfessorPhotoFrame] Falha ao carregar imagem principal. Alternando para rota de fallback.');
+    if (imgSrc !== defaultPortrait) {
+      setImgSrc(defaultPortrait);
+    } else if (imgSrc !== './professor-costa.jpg') {
+      setImgSrc('./professor-costa.jpg');
+    }
+  };
 
   const onDrop = (e: React.DragEvent) => {
     e.preventDefault();
@@ -62,13 +81,15 @@ export const ProfessorPhotoFrame: React.FC<ProfessorPhotoFrameProps> = ({
       <div
         className={`relative overflow-hidden rounded-2xl bg-[#132A40] border ${
           isDragging ? 'border-2 border-[#D6A84F] scale-[1.01]' : 'border-[#1D3B5A]'
-        } shadow-2xl transition-all duration-300 ${aspectRatioClass}`}
+        } shadow-2xl transition-all duration-300 ${aspectRatioClass} flex items-center justify-center`}
       >
         <img
-          src={photoUrl}
+          src={imgSrc}
           alt={alt}
+          onError={handleImageError}
+          loading="eager"
+          decoding="sync"
           className={`${imageClassName} transition-transform duration-700 group-hover:scale-[1.02]`}
-          referrerPolicy="no-referrer"
         />
 
         {/* Drag overlay */}

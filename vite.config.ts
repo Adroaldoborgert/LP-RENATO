@@ -53,7 +53,7 @@ function photoSyncPlugin(): Plugin {
 
 export default defineConfig(() => {
   return {
-    base: '/',
+    base: './',
     plugins: [react(), tailwindcss(), photoSyncPlugin()],
     resolve: {
       alias: {
