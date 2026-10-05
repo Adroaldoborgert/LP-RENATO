@@ -2,36 +2,46 @@
   RewriteEngine On
   RewriteBase /
 
-  # Se o arquivo ou diretório físico existir, serve normalmente
+  # Se o arquivo ou diretório físico existir, serve diretamente
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]
 
-  # Redireciona todas as rotas para index.html (SPA Fallback)
+  # Redireciona todas as rotas SPA para index.html
   RewriteRule ^ index.html [L]
 </IfModule>
 
-# Habilitar compressão GZIP para maior velocidade
+# Habilitar compressão GZIP para máxima velocidade de carregamento
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json application/xml image/svg+xml
 </IfModule>
 
-# Cache de navegadores para recursos estáticos
-<IfModule mod_expires.c>
-  ExpiresActive On
-  ExpiresByType image/jpg "access plus 1 month"
-  ExpiresByType image/jpeg "access plus 1 month"
-  ExpiresByType image/gif "access plus 1 month"
-  ExpiresByType image/png "access plus 1 month"
-  ExpiresByType image/svg+xml "access plus 1 month"
-  ExpiresByType text/css "access plus 1 month"
-  ExpiresByType application/javascript "access plus 1 month"
-  ExpiresByType text/javascript "access plus 1 month"
+# Controle de Cache Inteligente
+<IfModule mod_headers.c>
+  # NUNCA cachear index.html (garante que atualizações e fotos novas apareçam no primeiro acesso)
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+
+  # Assets com hash podem ter cache com revalidação
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Imagens com revalidação ativa (evita reter fotos antigas)
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|svg|ico)$">
+    Header set Cache-Control "public, max-age=86400, must-revalidate"
+  </FilesMatch>
 </IfModule>
 
-# Tipos MIME corretos
+# Tipos MIME corretos para servidores Apache / LiteSpeed (Hostinger)
 <IfModule mod_mime.c>
   AddType application/javascript .js
   AddType application/javascript .mjs
   AddType text/css .css
+  AddType image/jpeg .jpg .jpeg
+  AddType image/png .png
+  AddType image/webp .webp
 </IfModule>
