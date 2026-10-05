@@ -80,7 +80,7 @@ export function App() {
                 PROSPERE DE ONDE ESTÁ
               </span>
               <span className="text-[11px] text-[#D6A84F] block font-medium">
-                R$ 97 à vista ou até 12x • Garantia 7 Dias
+                R$ 299 à vista ou em até 3x de R$ 99,67 • Garantia 7 Dias
               </span>
             </div>
             

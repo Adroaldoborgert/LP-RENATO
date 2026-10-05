@@ -5,7 +5,7 @@ import {
   Lock, 
   ArrowUpRight 
 } from '@phosphor-icons/react';
-import { OFFER_DATA, GUARANTEE_DATA } from '../data/courseData';
+import { OFFER_DATA, GUARANTEE_DATA, HOTMART_CHECKOUT_URL } from '../data/courseData';
 
 interface OfferSectionProps {
   onOpenCheckout: () => void;
@@ -63,32 +63,37 @@ export const OfferSection: React.FC<OfferSectionProps> = ({ onOpenCheckout }) =>
             </div>
 
             {/* Price Display */}
-            <div className="space-y-1">
+            <div className="space-y-1.5">
               <div className="flex items-baseline justify-center gap-1.5 text-white">
                 <span className="text-2xl sm:text-3xl font-bold text-[#D6A84F]">R$</span>
                 <span className="text-6xl sm:text-7xl font-black tracking-tight text-white">
-                  97
+                  299
                 </span>
               </div>
-              <div className="text-sm font-semibold text-[#E8D5A8]">
+              <div className="text-sm sm:text-base font-semibold text-[#E8D5A8]">
                 {OFFER_DATA.pricing.installments}
+              </div>
+              <div className="text-xs text-[#E8D5A8]/70">
+                {OFFER_DATA.pricing.pixNotice}
               </div>
             </div>
 
             {/* CTA Button */}
             <div className="w-full space-y-3">
-              <button
-                onClick={onOpenCheckout}
+              <a
+                href={HOTMART_CHECKOUT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
                 id="offer-cta-btn"
-                className="w-full py-4.5 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#B88732] hover:from-[#E8D5A8] hover:to-[#D6A84F] text-[#0B1726] font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-xl hover:shadow-yellow-500/20 hover:scale-[1.01] flex items-center justify-center gap-2.5 cursor-pointer"
+                className="w-full py-4.5 rounded-xl bg-gradient-to-r from-[#D6A84F] to-[#B88732] hover:from-[#E8D5A8] hover:to-[#D6A84F] text-[#0B1726] font-black text-sm sm:text-base uppercase tracking-wider transition-all duration-200 shadow-xl hover:shadow-yellow-500/20 hover:scale-[1.01] flex items-center justify-center gap-2.5 cursor-pointer text-center"
               >
                 <span>{OFFER_DATA.ctaText}</span>
                 <ArrowUpRight className="w-5 h-5 text-[#0B1726] stroke-[3]" />
-              </button>
+              </a>
 
               <div className="flex items-center justify-center gap-1.5 text-[11px] text-[#E8D5A8]/80 font-medium">
                 <Lock className="w-3.5 h-3.5 text-[#D6A84F]" />
-                <span>Pagamento 100% seguro e criptografado</span>
+                <span>Pagamento 100% seguro pela Hotmart</span>
               </div>
             </div>
 

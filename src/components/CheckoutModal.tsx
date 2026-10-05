@@ -13,7 +13,7 @@ import {
   ArrowUpRight,
   Sparkle
 } from '@phosphor-icons/react';
-import { OFFER_DATA } from '../data/courseData';
+import { OFFER_DATA, HOTMART_CHECKOUT_URL } from '../data/courseData';
 
 interface CheckoutModalProps {
   isOpen: boolean;
@@ -22,7 +22,7 @@ interface CheckoutModalProps {
 
 export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose }) => {
   const [paymentMethod, setPaymentMethod] = useState<'credit_card' | 'pix' | 'boleto'>('pix');
-  const [installments, setInstallments] = useState('12');
+  const [installments, setInstallments] = useState('3');
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -48,7 +48,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
   };
 
   const copyPixCode = () => {
-    navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136prospere-professorcosta-transf20265204000053039865404497.005802BR5925PROSPERE DE ONDE ESTA6009SAO PAULO62070503***6304E8A2');
+    navigator.clipboard.writeText('00020126580014br.gov.bcb.pix0136prospere-professorcosta-transf20265204000053039865404299.005802BR5925PROSPERE DE ONDE ESTA6009SAO PAULO62070503***6304E8A2');
     setCopiedPix(true);
     setTimeout(() => setCopiedPix(false), 3000);
   };
@@ -85,19 +85,24 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
             </div>
 
             {/* Price Badge Summary */}
-            <div className="p-4 rounded-xl bg-[#0B1726] border border-[#1D3B5A] flex items-center justify-between">
+            <div className="p-4 rounded-xl bg-[#0B1726] border border-[#1D3B5A] flex flex-col sm:flex-row sm:items-center justify-between gap-3">
               <div>
-                <span className="text-[11px] text-[#E8D5A8]/70 block font-medium">Investimento:</span>
+                <span className="text-[11px] text-[#E8D5A8]/70 block font-medium">Investimento promocional:</span>
                 <span className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#F7F4EC] via-[#E8D5A8] to-[#D6A84F]">
-                  12x de {OFFER_DATA.pricing.installmentValue}
+                  3x de {OFFER_DATA.pricing.installmentValue}
                 </span>
                 <span className="text-xs text-[#E8D5A8]/80 block mt-0.5">ou {OFFER_DATA.pricing.cashPrice} à vista</span>
               </div>
-              <div className="text-right">
-                <span className="inline-flex items-center gap-1 text-[11px] text-[#0B1726] bg-[#D6A84F] px-3 py-1 rounded-full font-bold shadow-sm">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  Garantia 7 Dias
-                </span>
+              <div className="flex items-center gap-2">
+                <a
+                  href={HOTMART_CHECKOUT_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs text-[#0B1726] bg-[#D6A84F] hover:bg-[#E8D5A8] px-3.5 py-2 rounded-lg font-bold shadow-md transition-colors"
+                >
+                  <span>Pagar na Hotmart</span>
+                  <ArrowUpRight className="w-3.5 h-3.5 stroke-[3]" />
+                </a>
               </div>
             </div>
 
@@ -177,7 +182,7 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                   >
                     <CreditCard className="w-5 h-5 mx-auto mb-1 text-[#D6A84F]" />
                     <span className="text-xs block font-bold text-white">Cartão</span>
-                    <span className="text-[10px] text-[#E8D5A8]/70">Até 12x</span>
+                    <span className="text-[10px] text-[#E8D5A8]/70">Até 3x</span>
                   </button>
 
                   <button
@@ -200,11 +205,11 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                   <div className="p-4 rounded-xl bg-[#0B1726] border border-[#1D3B5A] space-y-3">
                     <div className="flex items-center justify-between text-xs">
                       <span className="text-[#F7F4EC] font-medium">Valor promocional à vista:</span>
-                      <span className="text-base font-bold text-[#D6A84F]">R$ 97,00</span>
+                      <span className="text-base font-bold text-[#D6A84F]">R$ 299,00</span>
                     </div>
                     <div className="p-3 rounded-lg bg-[#132A40] border border-[#1D3B5A] flex items-center justify-between gap-2">
                       <span className="text-[11px] font-mono text-[#E8D5A8]/70 truncate">
-                        00020126580014br.gov.bcb.pix...97.00BR
+                        00020126580014br.gov.bcb.pix...299.00BR
                       </span>
                       <button
                         type="button"
@@ -263,10 +268,9 @@ export const CheckoutModal: React.FC<CheckoutModalProps> = ({ isOpen, onClose })
                         onChange={(e) => setInstallments(e.target.value)}
                         className="w-full px-3.5 py-2.5 rounded-lg bg-[#132A40] border border-[#1D3B5A] text-sm text-white focus:outline-none focus:border-[#D6A84F]"
                       >
-                        <option value="12">12x de R$ 9,74 (Recomendado)</option>
-                        <option value="6">6x de R$ 17,90</option>
-                        <option value="3">3x de R$ 34,50</option>
-                        <option value="1">1x de R$ 97,00 à vista</option>
+                        <option value="3">3x de R$ 99,67 (Recomendado)</option>
+                        <option value="2">2x de R$ 149,50</option>
+                        <option value="1">1x de R$ 299,00 à vista</option>
                       </select>
                     </div>
                   </div>

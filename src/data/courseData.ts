@@ -180,6 +180,8 @@ export const MANIFESTO_DATA = {
   ]
 };
 
+export const HOTMART_CHECKOUT_URL = 'https://pay.hotmart.com/O107078396W?bid=1791211653580';
+
 export const OFFER_DATA = {
   title: "O QUE VOCÊ VAI RECEBER:",
   lead: "Conteúdo completo para mudar sua trajetória:",
@@ -192,12 +194,14 @@ export const OFFER_DATA = {
   ],
   pricing: {
     headline: "COMECE HOJE A MUDAR SUA TRAJETÓRIA.",
-    price: "R$ 97",
-    cashPrice: "R$ 97",
-    installments: "ou em até 12x no cartão",
-    installmentsCount: 12,
-    installmentValue: "R$ 9,68",
-    pixNotice: "OU R$ 97 À VISTA NO PIX / CARTÃO"
+    price: "R$ 299",
+    amount: "299",
+    cashPrice: "R$ 299",
+    installments: "em até 3x de R$ 99,67",
+    installmentsCount: 3,
+    installmentValue: "R$ 99,67",
+    pixNotice: "OU R$ 299 À VISTA NO PIX / CARTÃO",
+    checkoutUrl: HOTMART_CHECKOUT_URL
   },
   ctaText: "Garantir minha vaga",
   microcopy: "Acesso imediato • 100% online • Garantia incondicional de 7 dias",
